@@ -1,6 +1,6 @@
 # SSCCE: ANSI escape codes are present in ErrorPage.Internal at run-time, in the browser
 
-Because the dev server does not let the `ErrorPage` get shown, this reproduction instead console.logs the errant value (via `Pages.Script.log`). Otherwise I, AFAIK, this would need to be deployed just to reproduce the problem.
+Because the dev server does not let the `ErrorPage` get shown, this reproduction instead console.logs the errant value (via `Pages.Script.log`). Otherwise AFAIK, this would need to be deployed just to reproduce the problem.
 
 First start up the dev server:
 
@@ -8,8 +8,7 @@ First start up the dev server:
     npx elm-pages dev
 
 
-Then load localhost:1234/foobar in browser. You'll notice the following console output from the
-`Route.Foobar.data` function:
+Then load localhost:1234/foobar in browser. Notice the following console output from the `Route.Foobar.data` function:
 
 ```json
 {
@@ -19,6 +18,6 @@ Then load localhost:1234/foobar in browser. You'll notice the following console 
 
 ```
 
-Which shows ANSI escape codes in the `FatalError` body string.
+This output shows ANSI escape codes in the `FatalError` body string.
 
 See [Route.Foobar.data](./app/Route/Foobar.elm#L98)
