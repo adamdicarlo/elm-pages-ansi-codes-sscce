@@ -18,6 +18,10 @@ type alias Model =
 
 init : ErrorPage -> ( Model, Effect Msg )
 init errorPage =
+    let
+        _ =
+            Debug.log "errorPage" errorPage
+    in
     ( { count = 0 }
     , Effect.none
     )
@@ -54,7 +58,14 @@ view : ErrorPage -> Model -> View Msg
 view error model =
     { body =
         [ Html.div []
-            [ Html.p [] [ Html.text "Page not found. Maybe try another URL?" ]
+            [ Html.p []
+            [ case error of
+                NotFound ->
+                    Html.text "Not found"
+
+                InternalError detail ->
+                    Html.text detail
+            ]
             , Html.div []
                 [ Html.button
                     [ onClick Increment
@@ -67,7 +78,7 @@ view error model =
                 ]
             ]
         ]
-    , title = "This is a NotFound Error"
+    , title = "Error"
     }
 
 
